@@ -1,0 +1,22 @@
+from typing import List
+
+
+def find_maximum_distance(number_of_cities: int, cities_with_train_station: List[int]) -> int:
+    cities_with_train_station.sort()  # Using sort incase the list is not sorted
+    max_dist = cities_with_train_station[0]
+    for i in range(len(cities_with_train_station) - 1):
+        dist = (cities_with_train_station[i + 1] - cities_with_train_station[i]) // 2
+        if dist > max_dist:
+            max_dist = dist
+    return int(max_dist) if max_dist > number_of_cities - 1 - cities_with_train_station[-1] \
+        else number_of_cities - 1 - cities_with_train_station[-1]
+
+
+if name == "__main__":
+    # These are some of test cases. When evaluating the task, more will be added:
+    assert find_maximum_distance(number_of_cities=3, cities_with_train_station=[1]) == 1
+    assert find_maximum_distance(number_of_cities=4, cities_with_train_station=[3]) == 3
+    assert (
+            find_maximum_distance(number_of_cities=5, cities_with_train_station=[0, 4]) == 2
+    )
+    print("ALL TESTS PASSED")
